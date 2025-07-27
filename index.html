@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Mudra 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      color: #d10068;
+      font-size: 2em;
+      margin-bottom: 20px;
+      animation: pop 1s ease-out;
+    }
+
+    #wishBox {
+      font-size: 1.3em;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      width: 80%;
+      max-width: 400px;
+      min-height: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background: #d10068;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff4d88;
+    }
+
+    .floating {
+      position: absolute;
+      top: -50px;
+      font-size: 30px;
+      animation: floatDown linear infinite;
+    }
+
+    @keyframes floatDown {
+      0% { transform: translateY(-50px) rotate(0); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .explosion {
+      font-size: 40px;
+      animation: boom 1s ease-out infinite;
+    }
+
+    @keyframes boom {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+      100% { transform: scale(0.8); opacity: 0; }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday, Mudra 👑💖</h1>
+  <div id="wishBox">Click the button below to see your surprise wishes! 🎂🎈</div>
+  <button onclick="showNextWish()">💌 Show Wish</button>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Extra Floating Emojis
+    const floatEmojis = ["❤️", "🎈", "💖", "🎉", "✨", "🥳"];
+
+    for (let i = 0; i < 50; i++) {
+      let emoji = document.createElement('div');
+      emoji.className = 'floating';
+      emoji.innerText = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (Math.random() * 4 + 3) + "s";
+      emoji.style.fontSize = (Math.random() * 10 + 25) + "px";
+      document.body.appendChild(emoji);
+    }
+
+    const wishes = [
+      "🎂 Mudra, today is your magical day! 💖",
+      "❤️ You make life more beautiful, just by being in it! ✨",
+      "🎈 May your smile shine brighter every year! 🥳",
+      "🎁 You're not just my bestie, you're my forever person! 💫",
+      "👑 Always be the Queen of your world -- Happy Birthday! 💃"
+    ];
+
+    let currentWish = 0;
+
+    function showNextWish() {
+      if (currentWish < wishes.length) {
+        typeText(wishes[currentWish]);
+        currentWish++;
+      } else {
+        typeText("🎂💥🎉 Mudra, may Mahadev bless you with infinite happiness! ❤️🌟✨");
+        showExplosion();
+      }
+    }
+
+    function typeText(text) {
+      let i = 0;
+      const box = document.getElementById("wishBox");
+      box.innerHTML = "";
+      function type() {
+        if (i < text.length) {
+          box.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, 40);
+        }
+      }
+      type();
+    }
+
+    function showExplosion() {
+      for (let i = 0; i < 20; i++) {
+        let boom = document.createElement("div");
+        boom.className = "explosion";
+        boom.innerText = "🎉🎂✨🤗❤️💖";
+        boom.style.position = "absolute";
+        boom.style.left = Math.random() * 100 + "vw";
+        boom.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(boom);
+
+        setTimeout(() => {
+          boom.remove();
+        }, 1500);
+      }
+    }
+  </script>
+
+</body>
+</html>
